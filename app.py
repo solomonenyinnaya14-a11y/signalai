@@ -4,7 +4,7 @@ from datetime import datetime
 
 st.set_page_config(page_title="SignalAI - Customer Radar", page_icon="📡", layout="wide", initial_sidebar_state="collapsed")
 
-# SKY BLUE + WHITE TIGHT THEME
+# SKY BLUE + WHITE TIGHT THEME - FIXED SUCCESS BOX
 st.markdown("""
 <style>
     .stApp {background: linear-gradient(135deg, #87CEEB 0%, #E0F6FF 100%);}
@@ -20,14 +20,25 @@ st.markdown("""
     .stTextInput>div>div>input {background-color: #f8f9fa; color: #1a1a1a; 
                                 border-radius: 10px; border: 2px solid #ddd;}
     .stTextInput>div>div>input:focus {border: 2px solid #87CEEB;}
-    .stInfo {background-color: #e6f7ff; border-left: 4px solid #87CEEB; color: #1a1a1a;}
-    .stSuccess {background-color: #e8f5e9; border-left: 4px solid #4caf50; color: #1a1a1a;}
+    .stInfo {background-color: #e6f7ff; border-left: 4px solid #87CEEB; color: #1a1a1a; border-radius: 10px;}
+    
+    /* FIXED: White text on blue success box */
+    .stSuccess {
+        background-color: #1E90FF !important; 
+        border-left: 4px solid #0d6efd; 
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        font-size: 16px !important;
+        border-radius: 10px;
+    }
+    .stSuccess * {color: #ffffff !important;}
+    
     .footer {text-align: center; color: #666; margin-top: 1rem; font-weight: 600; font-size: 14px;}
     .footer span {color: #1E90FF; font-weight: 800;}
 </style>
 """, unsafe_allow_html=True)
 
-# LOGO AT TOP - TIGHT SPACING, NO BIG WHITE CARD
+# LOGO AT TOP
 col1, col2, col3 = st.columns([1,2,1])
 with col2:
     try:
@@ -38,11 +49,11 @@ with col2:
 
 st.markdown("<div style='margin-top:-20px;'></div>", unsafe_allow_html=True)
 
-# FIXED SUBTEXT - CEO COPY
+# CEO SUBTEXT
 st.markdown("### **Find customers talking about your product**")
 st.markdown("<p style='color:#1E90FF;font-weight:600;margin-top:-8px;font-size:15px;'>Stop scrolling. Start selling. Real buyers, real time.</p>", unsafe_allow_html=True)
 
-# Session state for saved searches
+# Session state
 if 'searches' not in st.session_state:
     st.session_state.searches = ["phone cases", "hair oil"]
 
@@ -52,13 +63,11 @@ with col1:
 with col2:
     city = st.text_input("📍 Your city", value="Port Harcourt")
 
-# Save search button
 if st.button("💾 Save this search"):
     if product and product not in st.session_state.searches:
         st.session_state.searches.append(product)
         st.success(f"✅ Saved: {product}")
 
-# Scan button
 if st.button("🔍 Scan for Customers"):
     if product and city:
         query = f'"{product}" ("buy" OR "price" OR "need" OR "recommend") {city}'
@@ -114,6 +123,5 @@ if st.button("📲 Send test alert to WhatsApp"):
     else:
         st.warning("Enter WhatsApp number")
 
-# COPYRIGHT FOOTER
 year = datetime.now().year
 st.markdown(f'<div class="footer">© {year} <span>@signalai</span>. All rights reserved. Made for Nigerian vendors 🇳🇬</div>', unsafe_allow_html=True)
