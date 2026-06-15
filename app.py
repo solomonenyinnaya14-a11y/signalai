@@ -4,12 +4,14 @@ from datetime import datetime
 
 st.set_page_config(page_title="SignalAI - Customer Radar", page_icon="📡", layout="wide", initial_sidebar_state="collapsed")
 
-# SKY BLUE + WHITE TIGHT THEME - FIXED SUCCESS BOX
+# SKY BLUE + WHITE THEME ONLY - NO GREEN
 st.markdown("""
 <style>
     .stApp {background: linear-gradient(135deg, #87CEEB 0%, #E0F6FF 100%);}
     .block-container {padding-top: 1rem !important; padding-bottom: 1rem !important;}
-    .stMarkdown, .stText, label {color: #1a1a1a !important;}
+    .stMarkdown, .stText, label, h1, h2, h3 {color: #1a1a1a !important;}
+    
+    /* BUTTONS - SKY BLUE GRADIENT */
     .stButton>button {background: linear-gradient(90deg, #1E90FF 0%, #87CEEB 100%); 
                       color: #fff; border-radius: 12px; border: 2px solid #1E90FF; 
                       font-weight: 700; padding: 0.7rem 1.5rem; font-size: 16px;
@@ -17,12 +19,17 @@ st.markdown("""
     .stButton>button:hover {background: linear-gradient(90deg, #87CEEB 0%, #1E90FF 100%); 
                             color: #fff; transform: translateY(-2px); 
                             box-shadow: 0 6px 20px rgba(30,144,255,0.4);}
-    .stTextInput>div>div>input {background-color: #f8f9fa; color: #1a1a1a; 
-                                border-radius: 10px; border: 2px solid #ddd;}
-    .stTextInput>div>div>input:focus {border: 2px solid #87CEEB;}
-    .stInfo {background-color: #e6f7ff; border-left: 4px solid #87CEEB; color: #1a1a1a; border-radius: 10px;}
     
-    /* FIXED: White text on blue success box */
+    /* INPUTS */
+    .stTextInput>div>div>input {background-color: #ffffff; color: #1a1a1a; 
+                                border-radius: 10px; border: 2px solid #87CEEB;}
+    .stTextInput>div>div>input:focus {border: 2px solid #1E90FF; box-shadow: 0 0 0 2px rgba(30,144,255,0.2);}
+    
+    /* INFO BOX - LIGHT SKY BLUE */
+    .stInfo {background-color: #E0F6FF; border-left: 4px solid #87CEEB; color: #1a1a1a; border-radius: 10px;}
+    .stInfo * {color: #1a1a1a !important;}
+    
+    /* SUCCESS BOX - SKY BLUE BG + WHITE TEXT - FIXED */
     .stSuccess {
         background-color: #1E90FF !important; 
         border-left: 4px solid #0d6efd; 
@@ -30,9 +37,16 @@ st.markdown("""
         font-weight: 700 !important;
         font-size: 16px !important;
         border-radius: 10px;
+        padding: 1rem !important;
     }
     .stSuccess * {color: #ffffff !important;}
+    .stSuccess svg {fill: #ffffff !important;}
     
+    /* WARNING BOX - ORANGE BUT TEXT WHITE */
+    .stWarning {background-color: #FF8C00; border-left: 4px solid #FF6B00; color: #ffffff; border-radius: 10px;}
+    .stWarning * {color: #ffffff !important;}
+    
+    /* FOOTER */
     .footer {text-align: center; color: #666; margin-top: 1rem; font-weight: 600; font-size: 14px;}
     .footer span {color: #1E90FF; font-weight: 800;}
 </style>
