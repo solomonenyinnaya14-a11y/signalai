@@ -4,32 +4,37 @@ from datetime import datetime
 
 st.set_page_config(page_title="SignalAI - Customer Radar", page_icon="📡", layout="wide")
 
-# GOLD + BLACK LUXURY THEME
+# GOLD + BLACK + WHITE BALANCED THEME
 st.markdown("""
 <style>
-    .stApp {background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);}
-    .main {background: linear-gradient(180deg, #0a0a0a 0%, #000 100%); 
-           padding: 2rem; border-radius: 20px; margin: 1rem; 
-           border: 2px solid #FFD700; box-shadow: 0 0 30px rgba(255,215,0,0.3);}
-    h1 {color: #FFD700; font-weight: 900; text-shadow: 0 0 20px rgba(255,215,0,0.5);}
-    .stMarkdown, .stText {color: #FFD700 !important;}
-    .stButton>button {background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%); 
-                      color: #000; border-radius: 12px; border: 2px solid #FFD700; 
-                      font-weight: 800; padding: 0.7rem 1.5rem; font-size: 16px;
-                      transition: 0.3s; box-shadow: 0 4px 15px rgba(255,215,0,0.4);}
-    .stButton>button:hover {transform: scale(1.05); box-shadow: 0 0 25px rgba(255,215,0,0.8);}
-    .stTextInput>div>div>input {background-color: #1a1a1a; color: #FFD700; 
-                                border-radius: 10px; border: 2px solid #FFD700;}
-    .stInfo {background-color: #1a1a1a; border-left: 4px solid #FFD700; color: #FFD700;}
-    .stSuccess {background-color: #1a1a1a; border-left: 4px solid #00FF00; color: #FFD700;}
-    .footer {text-align: center; color: #FFD700; margin-top: 2rem; font-weight: 700; font-size: 14px;}
-    a {color: #FFD700 !important; font-weight: 600;}
+    .stApp {background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);}
+    .main {background: #ffffff; padding: 2.5rem; border-radius: 20px; margin: 1rem; 
+           border: 2px solid #FFD700; box-shadow: 0 8px 32px rgba(0,0,0,0.1);}
+    h1 {color: #1a1a1a; font-weight: 900;}
+    h1 span {color: #FFD700;}
+    .stMarkdown, .stText, label {color: #333 !important;}
+    .stButton>button {background: linear-gradient(90deg, #1a1a1a 0%, #000 100%); 
+                      color: #FFD700; border-radius: 12px; border: 2px solid #FFD700; 
+                      font-weight: 700; padding: 0.7rem 1.5rem; font-size: 16px;
+                      transition: 0.3s;}
+    .stButton>button:hover {background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%); 
+                            color: #000; transform: translateY(-2px); 
+                            box-shadow: 0 6px 20px rgba(255,215,0,0.4);}
+    .stTextInput>div>div>input {background-color: #fafafa; color: #1a1a1a; 
+                                border-radius: 10px; border: 2px solid #ddd;}
+    .stTextInput>div>div>input:focus {border: 2px solid #FFD700;}
+    .stInfo {background-color: #fff9e6; border-left: 4px solid #FFD700; color: #333;}
+    .stSuccess {background-color: #e8f5e9; border-left: 4px solid #4caf50; color: #1a1a1a;}
+    .footer {text-align: center; color: #666; margin-top: 2rem; font-weight: 600; font-size: 14px;}
+    .footer span {color: #FFD700; font-weight: 800;}
+    a {color: #1a1a1a !important; font-weight: 600;}
+    a:hover {color: #FFD700 !important;}
 </style>
 """, unsafe_allow_html=True)
 
 st.markdown('<div class="main">', unsafe_allow_html=True)
 
-st.title("📡 SignalAI")
+st.title("📡 Signal<span>AI</span>", unsafe_allow_html=True)
 st.markdown("**Find customers talking about your product** | *Customer radar for Nigerian vendors*")
 
 # Session state for saved searches
@@ -58,7 +63,7 @@ if st.button("🔍 Scan for Customers"):
         
         fb_query = urllib.parse.quote(f'{product} {city}')
         fb_marketplace = f"https://www.facebook.com/marketplace/search/?query={fb_query}"
-        fb_groups = f"https://www.facebook.com/search/top/?q={fb_query}"
+        fb_groups = f"https://www.facebook.com/search/top/?q={fb_groups}"
         
         st.success(f"🚀 Scanning for '{product}' in {city}...")
         
@@ -108,4 +113,4 @@ st.markdown('</div>', unsafe_allow_html=True)
 
 # COPYRIGHT FOOTER
 year = datetime.now().year
-st.markdown(f'<div class="footer">© {year} @signalai. All rights reserved. Made for Nigerian vendors 🇳🇬</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="footer">© {year} <span>@signalai</span>. All rights reserved. Made for Nigerian vendors 🇳🇬</div>', unsafe_allow_html=True)
