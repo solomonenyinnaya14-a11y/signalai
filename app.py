@@ -17,10 +17,11 @@ def success_box(text):
         font-weight: 700;
         font-size: 16px;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        line-height: 1.4;
     ">
         {text}
     </div>
-    """, height=60)
+    """, height=80)  # FIXED: was 60, now 80 so text doesn't cut
 
 st.markdown("""
 <style>
@@ -116,7 +117,7 @@ phone = st.text_input("Your WhatsApp number", placeholder="2347067149516")
 if st.button("📲 Send test alert to WhatsApp"):
     if phone:
         phone = phone.strip().replace(" ", "")
-        if phone.startswith("0"):  # FIXED: was "starts with"
+        if phone.startswith("0"):
             phone = "234" + phone[1:]
         elif not phone.startswith("234"):
             phone = "234" + phone
