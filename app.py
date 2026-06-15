@@ -4,18 +4,26 @@ from datetime import datetime
 
 st.set_page_config(page_title="SignalAI - Customer Radar", page_icon="📡", layout="wide")
 
-# BRIGHT UI THEME
+# GOLD + BLACK LUXURY THEME
 st.markdown("""
 <style>
-    .stApp {background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);}
-    .main {background-color: white; padding: 2rem; border-radius: 20px; margin: 1rem;}
-    h1 {color: #667eea; font-weight: 800;}
-    .stButton>button {background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); 
-                      color: white; border-radius: 12px; border: none; font-weight: 600; 
-                      padding: 0.6rem 1.2rem; transition: 0.3s;}
-    .stButton>button:hover {transform: scale(1.05); box-shadow: 0 5px 15px rgba(102,126,234,0.4);}
-    .stTextInput>div>div>input {border-radius: 10px; border: 2px solid #667eea;}
-    .footer {text-align: center; color: white; margin-top: 2rem; font-weight: 500;}
+    .stApp {background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);}
+    .main {background: linear-gradient(180deg, #0a0a0a 0%, #000 100%); 
+           padding: 2rem; border-radius: 20px; margin: 1rem; 
+           border: 2px solid #FFD700; box-shadow: 0 0 30px rgba(255,215,0,0.3);}
+    h1 {color: #FFD700; font-weight: 900; text-shadow: 0 0 20px rgba(255,215,0,0.5);}
+    .stMarkdown, .stText {color: #FFD700 !important;}
+    .stButton>button {background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%); 
+                      color: #000; border-radius: 12px; border: 2px solid #FFD700; 
+                      font-weight: 800; padding: 0.7rem 1.5rem; font-size: 16px;
+                      transition: 0.3s; box-shadow: 0 4px 15px rgba(255,215,0,0.4);}
+    .stButton>button:hover {transform: scale(1.05); box-shadow: 0 0 25px rgba(255,215,0,0.8);}
+    .stTextInput>div>div>input {background-color: #1a1a1a; color: #FFD700; 
+                                border-radius: 10px; border: 2px solid #FFD700;}
+    .stInfo {background-color: #1a1a1a; border-left: 4px solid #FFD700; color: #FFD700;}
+    .stSuccess {background-color: #1a1a1a; border-left: 4px solid #00FF00; color: #FFD700;}
+    .footer {text-align: center; color: #FFD700; margin-top: 2rem; font-weight: 700; font-size: 14px;}
+    a {color: #FFD700 !important; font-weight: 600;}
 </style>
 """, unsafe_allow_html=True)
 
