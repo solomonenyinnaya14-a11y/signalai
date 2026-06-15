@@ -61,12 +61,21 @@ for i, s in enumerate(st.session_state.searches):
 
 st.markdown("---")
 st.subheader("📱 WhatsApp Alerts")
-phone = st.text_input("Your WhatsApp number", placeholder="2348012345678")
+phone = st.text_input("Your WhatsApp number", placeholder="2347067149516", help="Use 234 + your number, no 0. Example: 2347067149516")
+
 if st.button("Send test alert to WhatsApp"):
     if phone:
+        # Auto-convert 0706... to 234706...
+        phone = phone.strip().replace(" ", "")
+        if phone.startswith("0"):
+            phone = "234" + phone[1:]
+        elif not phone.startswith("234"):
+            phone = "234" + phone
+            
         msg = f"SignalAI Alert: New customer posted about '{product}' in {city} just now!"
         wa_link = f"https://wa.me/{phone}?text={urllib.parse.quote(msg)}"
         st.markdown(f"[Click to send alert →]({wa_link})")
+        st.success(f"Sending to +{phone}")
     else:
         st.warning("Enter WhatsApp number")
 
