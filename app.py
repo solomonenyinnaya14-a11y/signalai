@@ -4,40 +4,42 @@ from datetime import datetime
 
 st.set_page_config(page_title="SignalAI - Customer Radar", page_icon="📡", layout="wide", initial_sidebar_state="collapsed")
 
-# GOLD + BLACK + WHITE BALANCED THEME
+# SKY BLUE + WHITE + BLACK BALANCED THEME
 st.markdown("""
 <style>
-    .stApp {background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);}
+    .stApp {background: linear-gradient(135deg, #87CEEB 0%, #E0F6FF 100%);}
     .main {background: #ffffff; padding: 2.5rem; border-radius: 20px; margin: 1rem; 
-           border: 2px solid #FFD700; box-shadow: 0 8px 32px rgba(0,0,0,0.1);}
-    .stMarkdown, .stText, label {color: #333 !important;}
-    .stButton>button {background: linear-gradient(90deg, #1a1a1a 0%, #000 100%); 
-                      color: #FFD700; border-radius: 12px; border: 2px solid #FFD700; 
+           border: 2px solid #87CEEB; box-shadow: 0 8px 32px rgba(135,206,235,0.2);}
+    .stMarkdown, .stText, label {color: #1a1a1a !important;}
+    .stButton>button {background: linear-gradient(90deg, #1E90FF 0%, #87CEEB 100%); 
+                      color: #fff; border-radius: 12px; border: 2px solid #1E90FF; 
                       font-weight: 700; padding: 0.7rem 1.5rem; font-size: 16px;
                       transition: 0.3s;}
-    .stButton>button:hover {background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%); 
-                            color: #000; transform: translateY(-2px); 
-                            box-shadow: 0 6px 20px rgba(255,215,0,0.4);}
-    .stTextInput>div>div>input {background-color: #fafafa; color: #1a1a1a; 
+    .stButton>button:hover {background: linear-gradient(90deg, #87CEEB 0%, #1E90FF 100%); 
+                            color: #fff; transform: translateY(-2px); 
+                            box-shadow: 0 6px 20px rgba(30,144,255,0.4);}
+    .stTextInput>div>div>input {background-color: #f8f9fa; color: #1a1a1a; 
                                 border-radius: 10px; border: 2px solid #ddd;}
-    .stTextInput>div>div>input:focus {border: 2px solid #FFD700;}
-    .stInfo {background-color: #fff9e6; border-left: 4px solid #FFD700; color: #333;}
+    .stTextInput>div>div>input:focus {border: 2px solid #87CEEB;}
+    .stInfo {background-color: #e6f7ff; border-left: 4px solid #87CEEB; color: #1a1a1a;}
     .stSuccess {background-color: #e8f5e9; border-left: 4px solid #4caf50; color: #1a1a1a;}
     .footer {text-align: center; color: #666; margin-top: 2rem; font-weight: 600; font-size: 14px;}
-    .footer span {color: #FFD700; font-weight: 800;}
+    .footer span {color: #1E90FF; font-weight: 800;}
 </style>
 """, unsafe_allow_html=True)
 
 st.markdown('<div class="main">', unsafe_allow_html=True)
 
-# LOGO AT TOP - CENTER IT
+# LOGO AT TOP - CENTER IT WITH FALLBACK
 col1, col2, col3 = st.columns([1,2,1])
 with col2:
-    st.image("logo.png", width=250)
+    try:
+        st.image("logo.png", width=250)
+    except:
+        st.markdown("## 📡 Signal<span style='color:#1E90FF'>AI</span>", unsafe_allow_html=True)
 
 st.markdown("---")
 
-# NO MORE st.title() WITH HTML - FIXED
 st.markdown("### **Find customers talking about your product**")
 st.caption("*Customer radar for Nigerian vendors*")
 
