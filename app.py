@@ -1,10 +1,28 @@
 import streamlit as st
 import urllib.parse
+from datetime import datetime
 
 st.set_page_config(page_title="SignalAI - Customer Radar", page_icon="📡", layout="wide")
 
+# BRIGHT UI THEME
+st.markdown("""
+<style>
+    .stApp {background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);}
+    .main {background-color: white; padding: 2rem; border-radius: 20px; margin: 1rem;}
+    h1 {color: #667eea; font-weight: 800;}
+    .stButton>button {background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); 
+                      color: white; border-radius: 12px; border: none; font-weight: 600; 
+                      padding: 0.6rem 1.2rem; transition: 0.3s;}
+    .stButton>button:hover {transform: scale(1.05); box-shadow: 0 5px 15px rgba(102,126,234,0.4);}
+    .stTextInput>div>div>input {border-radius: 10px; border: 2px solid #667eea;}
+    .footer {text-align: center; color: white; margin-top: 2rem; font-weight: 500;}
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown('<div class="main">', unsafe_allow_html=True)
+
 st.title("📡 SignalAI")
-st.caption("Find customers talking about your product")
+st.markdown("**Find customers talking about your product** | *Customer radar for Nigerian vendors*")
 
 # Session state for saved searches
 if 'searches' not in st.session_state:
@@ -12,15 +30,15 @@ if 'searches' not in st.session_state:
 
 col1, col2 = st.columns(2)
 with col1:
-    product = st.text_input("What do you sell?", placeholder="clothes, cakes, gadgets")
+    product = st.text_input("🎯 What do you sell?", placeholder="clothes, cakes, gadgets")
 with col2:
-    city = st.text_input("Your city", value="Port Harcourt")
+    city = st.text_input("📍 Your city", value="Port Harcourt")
 
 # Save search button
 if st.button("💾 Save this search"):
     if product and product not in st.session_state.searches:
         st.session_state.searches.append(product)
-        st.success(f"Saved: {product}")
+        st.success(f"✅ Saved: {product}")
 
 # Scan button
 if st.button("🔍 Scan for Customers"):
@@ -34,38 +52,37 @@ if st.button("🔍 Scan for Customers"):
         fb_marketplace = f"https://www.facebook.com/marketplace/search/?query={fb_query}"
         fb_groups = f"https://www.facebook.com/search/top/?q={fb_query}"
         
-        st.success(f"Scanning for '{product}' in {city}...")
+        st.success(f"🚀 Scanning for '{product}' in {city}...")
         
-        st.markdown("### Open customer conversations:")
+        st.markdown("### 📊 Open customer conversations:")
         col1, col2 = st.columns(2)
         with col1:
-            st.markdown(f"[🐦 X/Twitter]({x_url})")
+            st.markdown(f"[🐦 **X/Twitter**]({x_url})")
         with col2:
-            st.markdown(f"[📘 Facebook Marketplace]({fb_marketplace})")
+            st.markdown(f"[📘 **Facebook Marketplace**]({fb_marketplace})")
         
-        st.markdown(f"[👥 Facebook Groups]({fb_groups})")
+        st.markdown(f"[👥 **Facebook Groups**]({fb_groups})")
         
         st.markdown("---")
-        st.subheader("Top customer posts found:")
-        st.info("X + Facebook block direct scraping. Click links above for live posts. Filter by 'Latest' and reply: I sell {product} in {city}. DM me")
+        st.subheader("🔥 Top customer posts found:")
+        st.info("💡 X + Facebook block direct scraping. Click links above → Filter by 'Latest' → Reply: 'I sell {product} in {city}. DM me'")
         
     else:
-        st.warning("Enter product + city first")
+        st.warning("⚠️ Enter product + city first")
 
 st.markdown("---")
 st.subheader("💾 Your Saved Searches")
 for i, s in enumerate(st.session_state.searches):
-    if st.button(f"Scan {s}", key=i):
+    if st.button(f"⚡ Scan {s}", key=i):
         st.session_state.last_search = s
         st.rerun()
 
 st.markdown("---")
 st.subheader("📱 WhatsApp Alerts")
-phone = st.text_input("Your WhatsApp number", placeholder="2347067149516", help="Use 234 + your number, no 0. Example: 2347067149516")
+phone = st.text_input("Your WhatsApp number", placeholder="2347067149516", help="Use 234 + your number, no 0")
 
-if st.button("Send test alert to WhatsApp"):
+if st.button("📲 Send test alert to WhatsApp"):
     if phone:
-        # Auto-convert 0706... to 234706...
         phone = phone.strip().replace(" ", "")
         if phone.startswith("0"):
             phone = "234" + phone[1:]
@@ -74,9 +91,13 @@ if st.button("Send test alert to WhatsApp"):
             
         msg = f"SignalAI Alert: New customer posted about '{product}' in {city} just now!"
         wa_link = f"https://wa.me/{phone}?text={urllib.parse.quote(msg)}"
-        st.markdown(f"[Click to send alert →]({wa_link})")
-        st.success(f"Sending to +{phone}")
+        st.markdown(f"[👉 Click to send alert →]({wa_link})")
+        st.success(f"📤 Sending to +{phone}")
     else:
         st.warning("Enter WhatsApp number")
 
-st.caption("SignalAI - Customer radar for Nigerian vendors")
+st.markdown('</div>', unsafe_allow_html=True)
+
+# COPYRIGHT FOOTER
+year = datetime.now().year
+st.markdown(f'<div class="footer">© {year} @signalai. All rights reserved. Made for Nigerian vendors 🇳🇬</div>', unsafe_allow_html=True)
