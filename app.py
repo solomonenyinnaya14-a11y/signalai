@@ -2,7 +2,7 @@ import streamlit as st
 import urllib.parse
 from datetime import datetime
 
-st.set_page_config(page_title="SignalAI - Customer Radar", page_icon="📡", layout="wide")
+st.set_page_config(page_title="SignalAI - Customer Radar", page_icon="📡", layout="wide", initial_sidebar_state="collapsed")
 
 # GOLD + BLACK + WHITE BALANCED THEME
 st.markdown("""
@@ -10,8 +10,6 @@ st.markdown("""
     .stApp {background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);}
     .main {background: #ffffff; padding: 2.5rem; border-radius: 20px; margin: 1rem; 
            border: 2px solid #FFD700; box-shadow: 0 8px 32px rgba(0,0,0,0.1);}
-    h1 {color: #1a1a1a; font-weight: 900;}
-    h1 span {color: #FFD700;}
     .stMarkdown, .stText, label {color: #333 !important;}
     .stButton>button {background: linear-gradient(90deg, #1a1a1a 0%, #000 100%); 
                       color: #FFD700; border-radius: 12px; border: 2px solid #FFD700; 
@@ -27,15 +25,21 @@ st.markdown("""
     .stSuccess {background-color: #e8f5e9; border-left: 4px solid #4caf50; color: #1a1a1a;}
     .footer {text-align: center; color: #666; margin-top: 2rem; font-weight: 600; font-size: 14px;}
     .footer span {color: #FFD700; font-weight: 800;}
-    a {color: #1a1a1a !important; font-weight: 600;}
-    a:hover {color: #FFD700 !important;}
 </style>
 """, unsafe_allow_html=True)
 
 st.markdown('<div class="main">', unsafe_allow_html=True)
 
-st.title("📡 Signal<span>AI</span>", unsafe_allow_html=True)
-st.markdown("**Find customers talking about your product** | *Customer radar for Nigerian vendors*")
+# LOGO AT TOP - CENTER IT
+col1, col2, col3 = st.columns([1,2,1])
+with col2:
+    st.image("logo.png", width=250)
+
+st.markdown("---")
+
+# NO MORE st.title() WITH HTML - FIXED
+st.markdown("### **Find customers talking about your product**")
+st.caption("*Customer radar for Nigerian vendors*")
 
 # Session state for saved searches
 if 'searches' not in st.session_state:
@@ -63,7 +67,7 @@ if st.button("🔍 Scan for Customers"):
         
         fb_query = urllib.parse.quote(f'{product} {city}')
         fb_marketplace = f"https://www.facebook.com/marketplace/search/?query={fb_query}"
-        fb_groups = f"https://www.facebook.com/search/top/?q={fb_groups}"
+        fb_groups = f"https://www.facebook.com/search/top/?q={fb_query}"
         
         st.success(f"🚀 Scanning for '{product}' in {city}...")
         
